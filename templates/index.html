@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="all" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" media="all" href="{{ url_for('static', filename='main.css')}}">
+    <script src="{{ url_for('static', filename='/js/jquery-3.6.0.js')}}"></script>
+    <script src="{{ url_for('static', filename='/js/bootstrap.js')}}"></script>
+    <title>Hi</title>
+</head>
+<body>
+
+<div class="container-fluid h-100 content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CCT Monitor Software</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Add Camera <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Delete Camera</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row justify-content-center h-100">
+        <div class="col-sm-2 alert-primary">
+            One of three columns
+        </div>
+        <div class="col-sm alert-secondary">
+            <img src="{{ url_for('video_feed', id=1) }}" width="100%">
+            <img src="{{ url_for('video_feed', id=2) }}" width="100%">
+            <img src="{{ url_for('video_feed', id=3) }}" width="100%">
+        </div>
+    </div>
+</div>
+</body>
+</html>
