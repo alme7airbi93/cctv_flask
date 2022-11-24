@@ -4,24 +4,14 @@ from cctv_database import CCTV_DB
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 database = {'CCTV': CCTV_DB()}
-
-cctv_list = [{'id': 1,
-              'ip': '192.168.50.231',
-              'username': 'admin',
-              'password': 'P@$$w0rd',
-              'port': '554',
-              'protocol': 'rtsp'}, {'id': 2,
-                                    'ip': '192.168.50.230',
-                                    'username': 'admin',
-                                    'password': 'P@$$w0rd',
-                                    'port': '554',
-                                    'protocol': 'rtsp'}
-             ]
+cameras = []
 
 
-def gen_frames(id):
-    for cam in cctv_list:
-        if int(cam['id']) == int(id):
+def gen_frames(cam_id):
+    global cameras
+
+    for cam in cameras:
+        if int(cam.doc_id) == int(cam_id):
             cctv = cam
             cap = cv2.VideoCapture(
                 f'{cctv["protocol"]}://{cctv["username"]}:{cctv["password"]}@{cctv["ip"]}:{cctv["port"]}')
@@ -34,19 +24,18 @@ def gen_frames(id):
                     ret, buffer = cv2.imencode('.jpg', frame)
                     frame = buffer.tobytes()
                     yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
     return "Camera not found"
 
 
 @app.route("/")
 def home():
+    global cameras
     cameras = database['CCTV'].get_CCTV_List()
     return render_template("index.html", cameras=cameras)
 
 
 @app.route("/addCamera", methods=['POST'])
 def addCamera():
-    global cctv_list
     global database
 
     validated = False
