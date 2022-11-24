@@ -1,0 +1,48 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CCTV Details </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="addCamera" method="post">
+                    <div class="form-group" >
+                        <label for="exampleInputEmail1">IP Address</label>
+                        <input name="ip" type="text" minlength="7" maxlength="15" size="15"
+                               pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"
+                               class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Enter IP Address">
+                        <small id="emailHelp" class="form-text text-muted">Look again @ the ip you have entered, I will
+                            not validate it. Note we use RTSP protocol change from code if you want another
+                            protocol</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Port</label>
+                        <input name="port" type="number" class="form-control" id="exampleInputPassword1"
+                               placeholder="Enter Port number">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Camera Username </label>
+                        <input name="username" type="text" class="form-control" id="cameraUserNameInput"
+                               placeholder="Enter Camera Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Camera Password </label>
+                        <input name="password" type="password" class="form-control" id="cameraPasswordInput"
+                               placeholder="Enter Camera Password">
+                        <input name="protocol" value="rtsp" type="hidden" class="form-control" id="cameraProtocolInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Camera</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
