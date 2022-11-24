@@ -10,7 +10,8 @@
 </head>
 <body>
 {% include 'addCameraModal.html' %}
-<div class="container-fluid h-100 content">
+{% include 'settings.html' %}
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">CCT Monitor Software</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -20,15 +21,17 @@
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav ml-auto mr-5">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Add Camera </a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#addCameraModalCenter">Add Camera </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#settingsModalCenter">Settings </a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="row justify-content-center h-100">
-
-        <div class="col-sm-2 text-light bg-dark p-0 " align="center">
+    <div class="row  min-vh-100  mw-100 p-0 m-0 ">
+        <div class="col-sm-2 text-light bg-dark p-0 mh-100" align="center">
             <hr class="bg-light text-light m-0 position-relative fixed-top ">
             <br>
             <h5 class="mr-20">CCTV Cameras</h5>
@@ -59,8 +62,8 @@
                 {% endfor %}
             </ui>
         </div>
-        <div class="col-sm alert-secondary">
-            <div class="row justify-content-center h-100 w-100 mt-1">
+        <div class="col-sm bg-secondary p-0 w-100 mh-100">
+            <div class="row justify-content-center h-100 m-0 mw-100">
                 {% for cam in cameras %}
                 <div class="col-xl-6 mr-auto p-0">
                     <img src="{{ url_for('video_feed', id=cam.doc_id) }}" class="h-100 w-100">
@@ -70,6 +73,6 @@
             </div>
         </div>
     </div>
-</div>
+
 </body>
 </html>

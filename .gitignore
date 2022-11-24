@@ -2,3 +2,4 @@
 /.idea/CCTV_Flask.iml
 /.idea/.gitignore
 /cctv_db.json
+/settings_db.json

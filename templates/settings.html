@@ -1,0 +1,54 @@
+<!-- Modal -->
+<div class="modal fade" id="settingsModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Software Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="settings" method="post" class="p-2">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">
+                                    Button
+                                </button>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile03"
+                                       aria-describedby="inputGroupFileAddon03">
+                                <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                            </div>
+                        </div>
+                        <small id="emailHelp" class="form-text text-muted">Select the path where the software will save
+                            the captured videos, Steps :
+                        </small>
+                        <small>
+                            <uil style="list-style-type: none; padding-left:20px" class="form-text text-muted">
+                                <li>1. Create a Folder in your system</li>
+                                <li>2. Create a txt file named "storage.txt"</li>
+                                <li>3. Select the created file "storage.txt"</li>
+                                <li>4. Click on the save button</li>
+                            </uil>
+                        </small>
+                        <br>
+                        <div class="custom-control custom-switch">
+                            <input  name="isRecording" type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label form-text text-muted" for="customSwitch1">Toggle to start
+                                recording !</label>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-secondary">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

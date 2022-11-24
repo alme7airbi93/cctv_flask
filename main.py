@@ -1,9 +1,10 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
 import cv2
-from cctv_database import CCTV_DB
+from database import CCTV_DB, SETTINGS_DB
+
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
-database = {'CCTV': CCTV_DB()}
+database = {'CCTV': CCTV_DB(),'SETTINGS': SETTINGS_DB(), }
 cameras = []
 
 
