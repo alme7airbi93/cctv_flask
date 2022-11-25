@@ -26,3 +26,4 @@ Future Tasks :
  *  Store frames in video format
  *  Integrat motion detection 
  *  Motion detection on/off button
+ *  Record tab
