@@ -1,4 +1,4 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, where, Query
 
 
 class CCTV_DB:
@@ -22,13 +22,22 @@ class SETTINGS_DB:
     def __init__(self) -> None:
         self.cctv_db = TinyDB('settings_db.json')
 
-    def save_settings(self, cctv):
-        self.cctv_db.insert(cctv)
+    def save_settings(self, settings):
+        self.cctv_db.insert(settings)
 
-    def get_settings_List(self):
-        return self.cctv_db.all()
+    def update_settings(self, settings: dict):
+        self.delete_SETTINGS(1)
+        self.save_settings(settings)
 
-    def delete_CCTV(self, id):
+    def get_settings_Dict(self):
+        list = self.cctv_db.all()
+        settings = {}
+        for item in list:
+            for key, val in item.items():
+                settings[key] = val
+        return settings
+
+    def delete_SETTINGS(self, id):
         try:
             self.cctv_db.remove(doc_ids=[int(id)])
         except:

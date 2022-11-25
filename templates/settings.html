@@ -1,4 +1,5 @@
 <!-- Modal -->
+
 <div class="modal fade" id="settingsModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -10,35 +11,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="settings" method="post" class="p-2">
+                <form action="updateSettings" method="post" class="p-2">
                     <div class="form-group">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">
-                                    Button
-                                </button>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile03"
-                                       aria-describedby="inputGroupFileAddon03">
-                                <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
-                            </div>
-                        </div>
-                        <small id="emailHelp" class="form-text text-muted">Select the path where the software will save
-                            the captured videos, Steps :
+                        <label for="filePath">CCT Software Storage Path : </label>
+                        <input name="filePath" type="text" class="form-control" id="filePath" value="{{settings.filePath}}"
+                               placeholder="C:\CCTV Storage">
+                        <small id="emailHelp" class="form-text text-muted">Copy and paste your directory path here,
+                            Steps
                         </small>
                         <small>
                             <uil style="list-style-type: none; padding-left:20px" class="form-text text-muted">
-                                <li>1. Create a Folder in your system</li>
-                                <li>2. Create a txt file named "storage.txt"</li>
-                                <li>3. Select the created file "storage.txt"</li>
-                                <li>4. Click on the save button</li>
+                                <li>1. Open File Browser</li>
+                                <li>2. Navigate into your storage directory</li>
+                                <li>3. Copy the URL path in top of the window</li>
+                                <li>4. Paste copied path in the text field</li>
                             </uil>
                         </small>
                         <br>
                         <div class="custom-control custom-switch">
-                            <input  name="isRecording" type="checkbox" class="custom-control-input" id="customSwitch1">
-                            <label class="custom-control-label form-text text-muted" for="customSwitch1">Toggle to start
+                            <input  class="custom-control-input" id="isRecording" name="isRecording"
+                                   type="checkbox" value="{{settings.isRecording}}">
+                            <label class="custom-control-label form-text text-muted" for="isRecording">Toggle to start
                                 recording !</label>
                         </div>
                     </div>
@@ -52,3 +45,12 @@
         </div>
     </div>
 </div>
+<script>
+         var isRecording = $('#isRecording').val();
+         if(isRecording == 'True'){
+            console.log("in if ", isRecording);
+            $( "#isRecording" ).prop( "checked", true );
+         }
+        console.log(isRecording);
+</script>
+
