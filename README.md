@@ -22,6 +22,7 @@ Software settings configuration
 
 
 Future Tasks : 
+ *  Fix protocol communication 
  *  Store frames in video format
  *  Integrat motion detection 
  *  Motion detection on/off button
