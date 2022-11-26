@@ -2,6 +2,7 @@ import cv2
 import time
 import database
 from datetime import datetime
+import os
 
 
 def gen_frames(cam_id):
@@ -20,7 +21,9 @@ def gen_frames(cam_id):
 
             frame_width = int(cap.get(3))
             frame_height = int(cap.get(4))
-            fileName = storagePath + str(datetime.now().strftime("%Y-%m-%d%H%M%S")) + ".avi"
+            fileName = storagePath +"\\"+ str(cam.doc_id)+"\\"+ str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+            if not os.path.isdir(storagePath +"\\"+ str(cam.doc_id) ):
+                os.makedirs(storagePath +"\\"+ str(cam.doc_id) )
             out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
                                   (frame_width, frame_height))
 
@@ -33,11 +36,11 @@ def gen_frames(cam_id):
                     break
                 else:
 
-                    if elapsed < int(settings['vidDuration']) * 60:
+                    if elapsed < int(settings['vidDuration']) :
                         out.write(frame)
                     else:
                         out.release()
-                        fileName = storagePath + str(datetime.now().strftime("%Y-%m-%d%H%M%S")) + ".avi"
+                        fileName = storagePath + "\\" + str(cam.doc_id)+"\\"  + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
                         out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,(frame_width, frame_height))
                         print("Success : " + str(success) + " _" + str(cctv["ip"]) + " :::::::  " + fileName)
                         start_time = time.time()
