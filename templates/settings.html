@@ -39,9 +39,11 @@
                     <label for="durationRangeInput">Video Duration to save : </label>
                     <small id="durationHelp" class="form-text text-muted">The range starting 10 mins to 120 mins</small>
                     <p id="durationRangeValue">1</p>
-                    <input name="vidDuration" type="range" class="custom-range" min="10" max="120" id="durationRangeInput"
-                           onchange="showVal(this.value)">
+                    <input name="vidDuration" type="range" class="custom-range" min="10" max="120"
+                           id="durationRangeInput"
+                           onchange="showVal(this.value)" >
                     <br>
+                    <input type="hidden" id="videoDurationHidden" value="{{settings.vidDuration}}">
                     <button type="submit" class="btn btn-secondary">Save</button>
                 </form>
             </div>
@@ -52,8 +54,16 @@
     </div>
 </div>
 <script>
-         var durationInput = $('#durationRangeInput').val();
-         $('#durationRangeValue').text(durationInput);
+         var videoDurationHidden = $('#videoDurationHidden').val();
+         var durationRangeInput = $('#durationRangeInput').val();
+
+         if(typeof videoDurationHidden === 'undefined'){
+            $('#durationRangeValue').text(durationRangeInput);
+         }else {
+            $('#durationRangeValue').text(videoDurationHidden);
+            $('#durationRangeInput').val(videoDurationHidden);
+         }
+
          function showVal(newVal){
                 $('#durationRangeValue').text(newVal);
             }
@@ -62,6 +72,7 @@
             $( "#isRecording" ).prop( "checked", true );
          }
         console.log(isRecording);
+
 
 
 </script>

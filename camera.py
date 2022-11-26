@@ -33,7 +33,7 @@ def gen_frames(cam_id):
                     break
                 else:
 
-                    if elapsed < 3600:
+                    if elapsed < int(settings['vidDuration']) * 60:
                         out.write(frame)
                     else:
                         out.release()
