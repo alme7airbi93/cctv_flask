@@ -8,46 +8,54 @@ import os
 def gen_frames(cam_id):
     cameras = database.CCTV_DB().get_CCTV_List()
     settings = database.SETTINGS_DB().get_settings_Dict()
-    storagePath = str(settings['filePath']+'\\')
+    storagePath = str(settings['filePath'] + '\\')
     start_time = time.time()
+
     for cam in cameras:
         if int(cam.doc_id) == int(cam_id):
 
-
             cctv = cam
-            cap = cv2.VideoCapture(
-                f'{cctv["protocol"]}://{cctv["username"]}:{cctv["password"]}@{cctv["ip"]}:{cctv["port"]}')
-
+            cap = cv2.VideoCapture(f'{cctv["protocol"]}://{cctv["username"]}:{cctv["password"]}@{cctv["ip"]}:{cctv["port"]}')
+            print("Started  @  : " + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")))
 
             frame_width = int(cap.get(3))
             frame_height = int(cap.get(4))
-            fileName = storagePath +"\\"+ str(cam.doc_id)+"\\"+ str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
-            if not os.path.isdir(storagePath +"\\"+ str(cam.doc_id) ):
-                os.makedirs(storagePath +"\\"+ str(cam.doc_id) )
+            fileName = storagePath + "\\" + str(cam.doc_id) + "\\" + str(
+                datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+            if not os.path.isdir(storagePath + "\\" + str(cam.doc_id)):
+                os.makedirs(storagePath + "\\" + str(cam.doc_id))
             out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
                                   (frame_width, frame_height))
-
+            recordDuration = int(settings['vidDuration']) * 60
+            print("Record Duration : " + str(recordDuration))
             while True:
                 now = time.time()
                 success, frame = cap.read()  # read the camera frame
                 elapsed = round(now - start_time)
-                # print("Success : "+ str(success) + " _" +  str(cctv["ip"]) + " " + fileName)
-                if not success:
-                    break
-                else:
 
-                    if elapsed < int(settings['vidDuration']) :
-                        out.write(frame)
-                    else:
-                        out.release()
-                        fileName = storagePath + "\\" + str(cam.doc_id)+"\\"  + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
-                        out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,(frame_width, frame_height))
-                        print("Success : " + str(success) + " _" + str(cctv["ip"]) + " :::::::  " + fileName)
-                        start_time = time.time()
+                if not success:
+                    cap.release()
+                    cap = cv2.VideoCapture(f'{cctv["protocol"]}://{cctv["username"]}:{cctv["password"]}@{cctv["ip"]}:{cctv["port"]}')
+                    print("Stopped @  : " + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")))
+                else:
+                    try:
+                        if elapsed < recordDuration:
+                            out.write(frame)
+                            # time.sleep(0.25)
+                        else:
+                            out.release()
+                            print("Record Saved : " + fileName)
+                            print("Starting new ...")
+                            fileName = storagePath + "\\" + str(cam.doc_id) + "\\" + str(
+                                datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+                            out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
+                                                  (frame_width, frame_height))
+                            start_time = time.time()
+
+                    except Exception as e:
+                        print("Error Rised : "+ str(e))
 
                     ret, buffer = cv2.imencode('.jpg', frame)
                     frame = buffer.tobytes()
                     yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     return "Camera not found"
-
-
