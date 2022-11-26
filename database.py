@@ -20,17 +20,17 @@ class CCTV_DB:
 
 class SETTINGS_DB:
     def __init__(self) -> None:
-        self.cctv_db = TinyDB('settings_db.json')
+        self.settings_db = TinyDB('settings_db.json')
 
     def save_settings(self, settings):
-        self.cctv_db.insert(settings)
+        self.settings_db.insert(settings)
 
     def update_settings(self, settings: dict):
-        self.delete_SETTINGS(1)
+        self.settings_db.truncate()
         self.save_settings(settings)
 
     def get_settings_Dict(self):
-        list = self.cctv_db.all()
+        list = self.settings_db.all()
         settings = {}
         for item in list:
             for key, val in item.items():
@@ -39,6 +39,6 @@ class SETTINGS_DB:
 
     def delete_SETTINGS(self, id):
         try:
-            self.cctv_db.remove(doc_ids=[int(id)])
+            self.settings_db.remove(doc_ids=[int(id)])
         except:
             return "Error deleting the camera"

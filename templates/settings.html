@@ -14,7 +14,8 @@
                 <form action="updateSettings" method="post" class="p-2">
                     <div class="form-group">
                         <label for="filePath">CCT Software Storage Path : </label>
-                        <input name="filePath" type="text" class="form-control" id="filePath" value="{{settings.filePath}}"
+                        <input name="filePath" type="text" class="form-control" id="filePath"
+                               value="{{settings.filePath}}"
                                placeholder="C:\CCTV Storage">
                         <small id="emailHelp" class="form-text text-muted">Copy and paste your directory path here,
                             Steps
@@ -29,12 +30,17 @@
                         </small>
                         <br>
                         <div class="custom-control custom-switch">
-                            <input  class="custom-control-input" id="isRecording" name="isRecording"
+                            <input class="custom-control-input" id="isRecording" name="isRecording"
                                    type="checkbox" value="{{settings.isRecording}}">
                             <label class="custom-control-label form-text text-muted" for="isRecording">Toggle to start
                                 recording !</label>
                         </div>
                     </div>
+                    <label for="durationRangeInput">Video Duration to save : </label>
+                    <small id="durationHelp" class="form-text text-muted">The range starting 10 mins to 120 mins</small>
+                    <p id="durationRangeValue">1</p>
+                    <input name="vidDuration" type="range" class="custom-range" min="10" max="120" id="durationRangeInput"
+                           onchange="showVal(this.value)">
                     <br>
                     <button type="submit" class="btn btn-secondary">Save</button>
                 </form>
@@ -46,11 +52,19 @@
     </div>
 </div>
 <script>
+         var durationInput = $('#durationRangeInput').val();
+         $('#durationRangeValue').text(durationInput);
+         function showVal(newVal){
+                console.log(newVal, "inShow");
+                $('#durationRangeValue').text(newVal);
+            }
          var isRecording = $('#isRecording').val();
          if(isRecording == 'True'){
             console.log("in if ", isRecording);
             $( "#isRecording" ).prop( "checked", true );
          }
         console.log(isRecording);
+
+
 </script>
 
