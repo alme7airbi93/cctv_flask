@@ -11,19 +11,17 @@ def gen_frames(cam_id):
     storagePath = str(settings['filePath'] + '\\')
     start_time = time.time()
 
-    for cam in cameras:
-        if int(cam.doc_id) == int(cam_id):
-
-            cctv = cam
+    for cctv in cameras:
+        if int(cctv.doc_id) == int(cam_id):
             cap = cv2.VideoCapture(f'{cctv["protocol"]}://{cctv["username"]}:{cctv["password"]}@{cctv["ip"]}:{cctv["port"]}')
             print("Started  @  : " + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")))
 
             frame_width = int(cap.get(3))
             frame_height = int(cap.get(4))
-            fileName = storagePath + "\\" + str(cam.doc_id) + "\\" + str(
+            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(
                 datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
-            if not os.path.isdir(storagePath + "\\" + str(cam.doc_id)):
-                os.makedirs(storagePath + "\\" + str(cam.doc_id))
+            if not os.path.isdir(storagePath + "\\" + str(cctv.doc_id)):
+                os.makedirs(storagePath + "\\" + str(cctv.doc_id))
             out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
                                   (frame_width, frame_height))
             recordDuration = int(settings['vidDuration']) * 60
@@ -46,7 +44,7 @@ def gen_frames(cam_id):
                             out.release()
                             print("Record Saved : " + fileName)
                             print("Starting new ...")
-                            fileName = storagePath + "\\" + str(cam.doc_id) + "\\" + str(
+                            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(
                                 datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
                             out = cv2.VideoWriter(fileName, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
                                                   (frame_width, frame_height))
