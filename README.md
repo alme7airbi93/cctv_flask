@@ -22,8 +22,4 @@ Software settings configuration
 
 
 Future Tasks : 
- *  Storage management
- *  record compression 
- *  Integrat motion detection 
- *  Motion detection on/off button
- *  View Record tab
+
