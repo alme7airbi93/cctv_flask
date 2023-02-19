@@ -33,11 +33,11 @@ def gen_frames(cam_id):
                 break
             
             dimensions = (int(frame_width * cfg.video.Scale), int(frame_height * cfg.video.Scale) )
-            
-            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
-            
-            if not os.path.isdir(storagePath + "\\" + str(cctv.doc_id)):
-                os.makedirs(storagePath + "\\" + str(cctv.doc_id))
+
+            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d")) + "\\" + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+
+            if not os.path.isdir(storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d"))):
+                os.makedirs(storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d")))
             
             out = cv2.VideoWriter(fileName, fourcc, cfg.video.Fps, dimensions)
 
@@ -77,8 +77,7 @@ def gen_frames(cam_id):
                             print("Record Saved : " + fileName, elapsed)
                             
                             print("Starting new ...")
-                            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(
-                                datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+                            fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d")) + "\\" + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
                             #initalizing file handle
                             out = cv2.VideoWriter(fileName, fourcc, cfg.video.Fps, dimensions)
                             #initializing timer                       
