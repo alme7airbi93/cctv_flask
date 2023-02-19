@@ -22,7 +22,5 @@ Software settings configuration
 
 
 Future Tasks : 
- *  Fix protocol communication 
- *  Integrat motion detection 
  *  Motion detection on/off button
  *  View Record tab
