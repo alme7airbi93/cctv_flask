@@ -22,5 +22,6 @@ Software settings configuration
 
 
 Future Tasks : 
- *  Motion detection on/off button
- *  View Record tab
+* Storage Management 
+* Motion detection on/off button
+* View Record tab
