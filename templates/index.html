@@ -70,7 +70,7 @@
         </div>
         <div class="col-sm bg-secondary p-0 w-100 ">
 
-            <div class="row justify-content-center h-100 m-0 mw-100">
+            <div class="row justify-content-center h-50 m-0 mw-100">
                 {% for cam in cameras %}
                 <div class="col-xl-6 mr-auto p-0">
                     <img src="{{ url_for('video_feed', id=cam.doc_id) }}" class="h-100 w-100">

@@ -69,7 +69,7 @@ def motionDetection(avg, fr):
         if (x>cfg.motion.maskLeft and (x+w)<cfg.motion.maskRight and y>cfg.motion.maskUp and (y+h)<cfg.motion.maskDwon):
             continue
         #else:
-            print(x,y,x+w, y+h)
+            #print(x,y,x+w, y+h)
         if cfg.motion.redBox:
             img = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
         

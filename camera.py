@@ -9,7 +9,7 @@ from config import cfg
 def gen_frames(cam_id):
     cameras = database.CCTV_DB().get_CCTV_List()
     settings = database.SETTINGS_DB().get_settings_Dict()
-    storagePath = str(settings['filePath'] + '\\')
+    storagePath = str(settings['filePath'])
     fourcc = cv2.VideoWriter_fourcc(*cfg.video.Encoder)
     start_time = time.time()
     frameCmp = None
@@ -78,6 +78,11 @@ def gen_frames(cam_id):
                             
                             print("Starting new ...")
                             fileName = storagePath + "\\" + str(cctv.doc_id) + "\\" + str(datetime.now().strftime("%Y-%m-%d")) + "\\" + str(datetime.now().strftime("%Y-%m-%d-%H%M%S")) + ".avi"
+                            if not os.path.isdir(storagePath + "\\" + str(cctv.doc_id) + "\\" + str(
+                                    datetime.now().strftime("%Y-%m-%d"))):
+                                os.makedirs(storagePath + "\\" + str(cctv.doc_id) + "\\" + str(
+                                    datetime.now().strftime("%Y-%m-%d")))
+
                             #initalizing file handle
                             out = cv2.VideoWriter(fileName, fourcc, cfg.video.Fps, dimensions)
                             #initializing timer                       
